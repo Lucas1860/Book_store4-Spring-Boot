@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html 
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">        
+    <head>
+        <title>My cart</title>
+    </head>
+
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <section layout:fragment="body" class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="text-center mb-5">
+                        <h1 class="fw-bolder">Your Cart</h1>
+                    </div>
+                    <div class="row gx-5">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            <div th:each="cartItem : ${cartItems}" class="col">
+                                <div class="card h-100">
+                                    <img th:src="${cartItem.book.photoUrl}" class="card-img-top img-fluid object-fit-cover" alt="Book Image"/>
+                                    <div class="card-body text-center">
+                                        <a th:text="${cartItem.book.title}" class="h5 text-decoration-none link-dark" href="#!"></a>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a class="btn btn-primary" th:href="@{/books/{bookId}(bookId=${cartItem.book.id})}">View</a>
+                                        <a class="btn btn-danger" th:href="@{/cart/remove/{cartItemId}(cartItemId=${cartItem.id})}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
